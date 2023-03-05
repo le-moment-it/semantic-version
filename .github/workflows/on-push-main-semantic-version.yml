@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  semantic_version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Perform semantic version
+        uses: paulhatch/semantic-version@v5.0.2
+        id: semantic_version
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          major_regexp_flags: ""
+          minor_pattern: "(MINOR)"
+          minor_regexp_flags: ""
+          version_format: "${major}.${minor}-rc${increment}"
+          user_format_type: "csv"
+          branch: main
+          bump_each_commit: false
+          search_commit_body: false
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}
+          name: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}
+          body: New release
+          draft: false
+          prerelease: false
+          commit: ${{ steps.semantic_version.outputs.current_commit }}
