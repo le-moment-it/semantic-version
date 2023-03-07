@@ -14,6 +14,7 @@ jobs:
 
       - name: Perform semantic version
         uses: paulhatch/semantic-version@v5.0.2
+        id: semantic_version
         with:
           tag_prefix: "v"
           major_pattern: "(MAJOR)"
@@ -25,3 +26,13 @@ jobs:
           branch: main
           bump_each_commit: true
           search_commit_body: false
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.semantic_version.outputs.version_tag }}
+          release_name: Release ${{ steps.semantic_version.outputs.version_tag }}
+          body: New release
+          draft: false
+          prerelease: false
+          commitish: ${{ steps.semantic_version.outputs.current_commit }}
