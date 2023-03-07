@@ -29,7 +29,7 @@ jobs:
           version_format: "${major}.${minor}.${patch}-prerelease${increment}"
           user_format_type: "csv"
           branch: main
-          bump_each_commit: true
+          bump_each_commit: false
           search_commit_body: false
 
       - name: Create Release
