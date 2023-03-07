@@ -31,11 +31,11 @@ jobs:
           search_commit_body: false
 
       - name: Create Release
-        uses: actions/create-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ steps.semantic_version.outputs.version_tag }}
-          release_name: Release ${{ steps.semantic_version.outputs.version_tag }}
+          tag: ${{ steps.semantic_version.outputs.version_tag }}
+          name: ${{ steps.semantic_version.outputs.version_tag }}
           body: New release
           draft: false
           prerelease: false
-          commitish: ${{ steps.semantic_version.outputs.current_commit }}
+          commit: ${{ steps.semantic_version.outputs.current_commit }}
