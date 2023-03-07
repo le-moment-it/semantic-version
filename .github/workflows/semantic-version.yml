@@ -3,6 +3,9 @@ on:
     branches:
       - main
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   semantic_version:
     runs-on: ubuntu-latest
@@ -29,8 +32,6 @@ jobs:
 
       - name: Create Release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.semantic_version.outputs.version_tag }}
           release_name: Release ${{ steps.semantic_version.outputs.version_tag }}
