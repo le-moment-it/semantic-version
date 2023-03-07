@@ -20,4 +20,4 @@ jobs:
           branch: main
           bump_each_commit: true
           search_commit_body: false
-          # change_path: "app"
+          change_path: "app/"
