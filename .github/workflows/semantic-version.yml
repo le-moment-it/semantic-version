@@ -31,6 +31,7 @@ jobs:
           branch: main
           bump_each_commit: false
           search_commit_body: false
+          enable_prerelease_mode: false
 
       - name: Create Release
         uses: ncipollo/release-action@v1
