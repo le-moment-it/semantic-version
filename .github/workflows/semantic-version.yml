@@ -35,7 +35,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.semantic_version.outputs.version_tag }}
+          tag: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}
           name: ${{ steps.semantic_version.outputs.version_tag }}
           body: New release
           draft: false
