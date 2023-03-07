@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  semantic_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Perform semantic version
+        uses: paulhatch/semantic-version@v5.0.2
+        with:
+          tag_prefix: "v"
+          major_pattern: "(MAJOR)"
+          major_regexp_flags: ""
+          minor_pattern: "(MINOR)"
+          minor_regexp_flags: ""
+          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          user_format_type: "csv"
+          branch: main
+          bump_each_commit: false
+          search_commit_body: false
