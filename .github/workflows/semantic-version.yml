@@ -26,12 +26,11 @@ jobs:
           major_regexp_flags: ""
           minor_pattern: "(MINOR)"
           minor_regexp_flags: ""
-          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          version_format: "${major}.${minor}"
           user_format_type: "csv"
           branch: main
           bump_each_commit: false
           search_commit_body: false
-          enable_prerelease_mode: false
 
       - name: Create Release
         uses: ncipollo/release-action@v1
