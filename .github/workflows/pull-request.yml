@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Verify that the pull request name follow the convention naming
         run: |
-          [[ "${{ github.event.pull_request.title }}" =~ ^\((MINOR|MAJOR)\).* ]] && return 0 ||  return 1
+          [[ "${{ github.event.pull_request.title }}" =~ ^\((MINOR|MAJOR)\).* ]] && exit 0 ||  exit 1
