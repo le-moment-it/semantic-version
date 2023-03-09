@@ -1,0 +1,16 @@
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+    branches:
+      - main
+
+jobs:
+  verify_pull_request_name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify that the pull request name follow the convention naming
+        run: |
+          [[ "${{ github.event.pull_request.title }}" =~ ^\((MINOR|MAJOR)\).* ]] && return 0 ||  return 1
