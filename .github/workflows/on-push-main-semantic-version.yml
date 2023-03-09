@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+      - develop
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,8 +36,8 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}
-          name: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}
+          tag: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}-rc${{ steps.semantic_version.outputs.increment }}
+          name: ${{ steps.semantic_version.outputs.major }}.${{ steps.semantic_version.outputs.minor }}-rc${{ steps.semantic_version.outputs.increment }}
           body: New release
           draft: false
           prerelease: false
